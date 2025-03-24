@@ -37,7 +37,7 @@ A = np.array([[0.801086, -0.115891, -0.018981],  # 'A^-1' matrix from Magneto
 b = np.array([0.380675, 0.254083, 0.167651])
 
 # Read raw data and apply calibration
-rawData = np.genfromtxt('examples/acceldata-example.txt',
+rawData = np.genfromtxt('acceldata.txt',
                         delimiter='\t')  # raw measurement file
 units = 'G\'s'  # units of accelerometer measurements (used for axis labels)
 
