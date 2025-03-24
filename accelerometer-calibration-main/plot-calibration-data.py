@@ -30,11 +30,11 @@ import matplotlib.pyplot as plt
 
 
 # Define calibration parameters
-A = np.array([[1.004332, 0.000046, 0.004896],  # 'A^-1' matrix from Magneto
-              [0.000046, 0.969793, 0.009452],
-              [0.004896, 0.009452, 1.022384]])
+A = np.array([[0.801086, -0.115891, -0.018981],  # 'A^-1' matrix from Magneto
+              [-0.115891, 0.871255, 0.010562],
+              [-0.018981, 0.010562, 0.831012]])
 # 'Combined bias (b)' vector from Magneto
-b = np.array([0.027031, -0.040204, 0.046558])
+b = np.array([0.380675, 0.254083, 0.167651])
 
 # Read raw data and apply calibration
 rawData = np.genfromtxt('examples/acceldata-example.txt',
