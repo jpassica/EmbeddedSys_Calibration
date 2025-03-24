@@ -55,7 +55,7 @@ void readMPUData() {
 
 void printSensorData() {
     // Print headers only once in the setup function
-    static bool printedHeader = false;
+    static bool printedHeader = true;
 
     if (!printedHeader) {
         // Print the CSV headers
@@ -65,8 +65,8 @@ void printSensorData() {
 
     // Print sensor data in CSV format
     long timestamp = millis();  // Current time in milliseconds
-    Serial.print(timestamp);  // Timestamp
-    Serial.print(",");  // Comma separator
+    // Serial.print(timestamp);  // Timestamp
+    // Serial.print(",");  // Comma separator
 
     // Accelerometer data (scaled)
     Serial.print(accelerometer_x / ACCEL_SCALE);

@@ -1,17 +1,3 @@
-"""
-
-RECORD ACCELEROMETER MEASUREMENTS FOR ACCELEROMETER CALIBRATION 
-VIA MAGNETO
-
-Code By: Michael Wrona
-Created: 17 Aug 2021
-
-This code reads acceleroemter measurements in G's over a serial connection 
-and logs them to a tab-delimited text file. It also pauses between each 
-reading and averages a few measurements.
-
-"""
-
 import os
 import math
 import pandas
@@ -21,8 +7,8 @@ import serial
 # global variables
 MAX_MEAS = 200  # max number of readings in the session, so that we don't create an infinite loop
 AVG_MEAS = 25  # for each reading, take this many measurements and average them
-SER_PORT = 'COM4'  # serial port the device is connected to
-SER_BAUD = 115200  # serial port baud rate
+SER_PORT = 'COM7'  # serial port the device is connected to
+SER_BAUD = 9600  # serial port baud rate
 FILENAME = os.path.join(os.getcwd(), 'acceldata.txt')  # output file
 
 
