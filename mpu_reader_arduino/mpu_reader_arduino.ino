@@ -95,5 +95,5 @@ void printSensorData() {
 void loop() {
     readMPUData();
     printSensorData();
-    delay(100);
+    delay(10);
 }
