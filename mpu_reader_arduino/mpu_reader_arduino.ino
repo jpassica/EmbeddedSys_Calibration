@@ -65,8 +65,8 @@ void printSensorData() {
 
     // Print sensor data in CSV format
     long timestamp = millis();  // Current time in milliseconds
-    // Serial.print(timestamp);  // Timestamp
-    // Serial.print(",");  // Comma separator
+    Serial.print(timestamp);  // Timestamp
+    Serial.print(",");  // Comma separator
 
     // Accelerometer data (scaled)
     Serial.print(accelerometer_x / ACCEL_SCALE);
