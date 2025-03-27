@@ -13,16 +13,16 @@ prev_velocity = [0,0,0]
 prev_position = [0,0,0]
 positions = [[0,0,0]]
 dt = 0.01
-A = np.array([[0.801086, -0.115891, -0.018981],  
-              [-0.115891, 0.871255, 0.010562],
-              [-0.018981, 0.010562, 0.831012]])
-b = np.array([[0.380675, 0.254083, 0.167651]]).T
+A = np.array([[13.836011, -0.020270, 0.265368],
+[-0.020270, 13.841415, -0.145284],
+[0.265368, -0.145284, 2.004729]])
+b = np.array([[0.218315, -0.054874, -5.544692]]).T
 
 # Connect to serial port
 arduino = serial.Serial('COM7', 9600) 
 time.sleep(2)  
 
-filename = f"position_data.csv"
+filename = f"raw_position_data.csv"
 with open(filename, 'w', newline='') as csvfile:
     csv_writer = csv.writer(csvfile)
     csv_writer.writerow(["timestamp","Filtered_X","Filtered_Y","Filtered_Z"])
@@ -46,10 +46,11 @@ with open(filename, 'w', newline='') as csvfile:
                     print(f"timestamp = {timestamp}")
                     break
             
-            # dt = (int(timestamp) - int(prev_timestamp)) / 1000
             prev_timestamp = timestamp
             print("-----------------------------------------------------")
             ax_linear, ay_linear, az_linear = remove_gravity_effect(sensor_x, sensor_y, sensor_z, G)
+            
+
             acc = np.array([[ax_linear, ay_linear, az_linear]]).T
             acc = A @ (acc - b)
             
@@ -59,9 +60,12 @@ with open(filename, 'w', newline='') as csvfile:
             KF_z, KF_P = kalman_filter(az_linear, KF_x, KF_P)
             
             prev_position, prev_velocity = integrate([KF_x[0][0],KF_y[0][0],KF_z[0][0]], dt, prev_velocity, prev_position)
+            # prev_position, prev_velocity = integrate([ax_linear,ay_linear, az_linear], dt, prev_velocity, prev_position)
             
-            # Write filtered data to CSV
+            # Write filtered data to file
             row = [timestamp, prev_position[0], prev_position[1], prev_position[2]]
+            # row = [sensor_x,sensor_y,sensor_z]
+            
             np.set_printoptions(suppress=True, precision=6) 
             csv_writer.writerow(row)
             read_count += 1

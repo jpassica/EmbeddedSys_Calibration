@@ -33,6 +33,11 @@ def remove_gravity_effect(ax,ay,az,G):
     ax_linear = ax - (gx if ax>0 else -gx)
     ay_linear = ay - (gy if ay>0 else -gy)
     az_linear = az - (gz if az>0 else -gz)
+
+    ax_linear = ax_linear if ax_linear > 5  else 0
+    ay_linear = ay_linear if ay_linear > 5  else 0
+    az_linear = az_linear if az_linear > 5  else 0
+    
     print(f"Acc After Components: ax_linear={ax_linear:.4f}, ay_linear={ay_linear:.4f}, az_linear={az_linear:.4f}")
 
     return ax_linear, ay_linear, az_linear
