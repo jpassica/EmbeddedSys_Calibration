@@ -22,7 +22,7 @@ b = np.array([[0.218315, -0.054874, -5.544692]]).T
 arduino = serial.Serial('COM7', 9600) 
 time.sleep(2)  
 
-filename = f"raw_position_data.csv"
+filename = f"position_data.csv"
 with open(filename, 'w', newline='') as csvfile:
     csv_writer = csv.writer(csvfile)
     csv_writer.writerow(["timestamp","Filtered_X","Filtered_Y","Filtered_Z"])
@@ -62,9 +62,8 @@ with open(filename, 'w', newline='') as csvfile:
             prev_position, prev_velocity = integrate([KF_x[0][0],KF_y[0][0],KF_z[0][0]], dt, prev_velocity, prev_position)
             # prev_position, prev_velocity = integrate([ax_linear,ay_linear, az_linear], dt, prev_velocity, prev_position)
             
-            # Write filtered data to file
+            # Write data to file
             row = [timestamp, prev_position[0], prev_position[1], prev_position[2]]
-            # row = [sensor_x,sensor_y,sensor_z]
             
             np.set_printoptions(suppress=True, precision=6) 
             csv_writer.writerow(row)
